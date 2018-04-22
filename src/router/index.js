@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Admin from '@/components/test'
-import r from '@/components/r2'
+import Channel from '@/components/Channel'
 import Carousel from '@/components/Carousel'
 
 Vue.use(Router)
@@ -24,8 +24,8 @@ export default new Router({
                component: Carousel
             },
             {
-               path: 'r2',
-               component: r
+               path: 'channel',
+               component: Channel
             }
        ]
     }

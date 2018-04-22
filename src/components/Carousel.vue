@@ -23,7 +23,7 @@
 	    
 	    <!--新增对话框-->
 	    <Modal
-	        v-model="modal2">
+	        v-model="modal2" :mask-closable="false" @on-cancel="closeAdd">
 	        <p slot="header" style="text-align:center">
 	            <span>新增轮播图</span>
 	        </p>
@@ -57,7 +57,7 @@
 	    <!--修改对话框-->
 	    <Modal
 	        v-model="modal3">
-	        <p slot="header" style="text-align:center">
+	        <p slot="header" style="text-align:center" :mask-closable="false" >
 	            <span>修改轮播图</span>
 	        </p>
 	        <Form ref="updateBanner" :model="updateBanner" id="updateBanner" :label-width="80">
@@ -135,7 +135,6 @@
                     {
                         title: '图片',
                         key: 'img',
-                        align: 'center',
                         render:(h,params) => {
                         	return h('img',{
                         		attrs:{
