@@ -7,7 +7,7 @@
                 </template>
                 <MenuItem name="carousel" >轮播图管理</MenuItem>
                 <MenuItem name="channel">频道管理</MenuItem>
-                <MenuItem name="1-3">举报管理</MenuItem>
+                <MenuItem name="leval">等级管理</MenuItem>
             </Submenu>
             <Submenu name="2">
                 <template slot="title">

@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Admin from '@/components/test'
 import Channel from '@/components/Channel'
 import Carousel from '@/components/Carousel'
+import Leval from '@/components/Leval'
 
 Vue.use(Router)
 
@@ -26,6 +27,10 @@ export default new Router({
             {
                path: 'channel',
                component: Channel
+            },
+            {
+               path: 'leval',
+               component: Leval
             }
        ]
     }
