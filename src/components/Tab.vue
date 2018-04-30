@@ -1,5 +1,5 @@
 <template>
-		<Menu theme="dark" :open-names="['1']" accordion @on-select="test" style="float: left;">
+		<Menu theme="dark" :open-names="['1']"  @on-select="test" style="float: left;">
             <Submenu name="1">
                 <template slot="title">
                     <Icon type="ios-paper"></Icon>
@@ -12,10 +12,11 @@
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-people"></Icon>
-                    	用户管理
+                    	视频管理
                 </template>
-                <MenuItem name="2-1">新增用户</MenuItem>
-                <MenuItem name="2-2">活跃用户</MenuItem>
+                <MenuItem name="video">视频审核</MenuItem>
+                <MenuItem name="recommend">推荐管理</MenuItem>
+                <MenuItem name="rank">排行榜单</MenuItem>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
