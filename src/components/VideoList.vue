@@ -58,7 +58,7 @@
 	        </div>
 	        <div slot="footer" style="text-align:center">
 	        	<Button  @click="closeDel">取消</Button>
-	            <Button type="primary" @click="toAddRecomment">确定</Button>
+	            <Button type="primary" @click="toAddVip">确定</Button>
 	        </div>
 	    </Modal>
 	</div>
@@ -157,38 +157,12 @@
                         }	
 	                },
 	                {
-                        title: '是否会员视频',
-                        key: 'vip',
-                        render:(h,params) => {
-                        	var flag = true
-                        	for(var i in this.viplist){
-                        		if(this.viplist[i].v_id === params.row.id){
-                        			flag = false
-                        		}
-                        	}
-                        	return h('div', [
-	                            h('div', {
-                                    style:{
-                                    	width:'5px',
-	                        			height:'5px',
-	                        			background:flag ? 'red':'blue',
-	                        			borderRadius:'50%',
-	                        			display:'inline-block',
-	                        			marginRight:'8px'
-                                    }
-                                }),
-                                h('span', flag?'否':'是')
-                            ]);
-                        	
-                        }	
-	                },
-	                {
                         title: '操作',
                         key: 'operate',
                         render: (h, params) => {
                         	var flag = true
-                        	for(var i in this.recommend){
-                        		if(this.recommend[i].v_id === params.row.id){
+                        	for(var i in this.viplist){
+                        		if(this.viplist[i].v_id === params.row.id){
                         			flag = false
                         		}
                         	}
@@ -220,7 +194,7 @@
 	                                        	this.modal2 = true
 	                                        }
 	                                    }
-	                                }, '添加到推荐')
+	                                }, '添加到vip')
                             ]);
                         }
 	                }
@@ -248,8 +222,6 @@
 					page:1,
 					sortname:'v_num'
 				},
-				//推荐列表
-				recommend:[],
 				//vip
 				viplist:[]
 			}
@@ -257,21 +229,33 @@
 		},
 		methods:{
 			//添加到推荐
-			toAddRecomment(){
+			toAddVip(){
 				var that = this
 				$.ajax({
 					type:"post",
-					url:"http://localhost:2255/recommend/add",
+					url:"http://localhost:2255/video/pass",
+					data:{
+						id:that.addRecommentId,
+						status:3
+					},
+					async:false,
+					success:function(data){
+						
+					}
+				});
+				
+				$.ajax({
+					type:"post",
+					url:"http://localhost:2255/vip/add",
 					data:{
 						v_id:that.addRecommentId
 					},
 					async:false,
 					success:function(data){
 						console.log(data)
-						that.$Message.success('添加到推荐列表成功')
+						that.$Message.success('添加到vip列表成功')
 						that.closeDel()
 						that.getVipList()
-						that.getRecommendList()
 						that.getVideoList()
 					}
 				});
@@ -279,18 +263,6 @@
 			//关闭提示框
 			closeDel(){
 				this.modal2 = false
-			},
-			//获取推荐列表
-			getRecommendList(){
-				var that = this
-				$.ajax({
-					type:"post",
-					url:"http://localhost:2255/recommend",
-					async:false,
-					success:function(data){
-						that.recommend = data
-					}
-				});
 			},
 			//获取视频详情
 			getVideoById(id){
@@ -389,7 +361,6 @@
 		},
 		mounted(){
 			this.getChannelList()
-			this.getRecommendList()
 			this.getVipList()
 			this.getVideoList()
 		}

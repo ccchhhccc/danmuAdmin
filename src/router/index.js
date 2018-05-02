@@ -8,6 +8,8 @@ import Leval from '@/components/Leval'
 import Video from '@/components/Video'
 import Recommend from '@/components/Recommend'
 import Rank from '@/components/Rank'
+import VipList from '@/components/VipList'
+import VideoList from '@/components/VideoList'
 
 Vue.use(Router)
 
@@ -46,6 +48,14 @@ export default new Router({
             {
                path: 'rank',
                component: Rank
+            },
+            {
+               path: 'vipVideo',
+               component: VipList
+            },
+            {
+               path: 'videoList',
+               component: VideoList
             }
        ]
     }

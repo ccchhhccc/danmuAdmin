@@ -1,8 +1,8 @@
 <template>
-		<Menu theme="dark" :open-names="['1']"  @on-select="test" style="float: left;">
+		<Menu theme="dark" :open-names="['1']" accordion  @on-select="test" style="float: left;">
             <Submenu name="1">
                 <template slot="title">
-                    <Icon type="ios-paper"></Icon>
+                    <Icon type="ios-gear"></Icon>
                    	 	平台设置
                 </template>
                 <MenuItem name="carousel" >轮播图管理</MenuItem>
@@ -11,7 +11,7 @@
             </Submenu>
             <Submenu name="2">
                 <template slot="title">
-                    <Icon type="ios-people"></Icon>
+                    <Icon type="ios-videocam"></Icon>
                     	视频管理
                 </template>
                 <MenuItem name="video">视频审核</MenuItem>
@@ -20,18 +20,19 @@
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
-                    <Icon type="stats-bars"></Icon>
-                    	统计分析
+                    <Icon type="social-youtube-outline"></Icon>
+                    	会员视频
                 </template>
-                <MenuGroup title="使用">
-                    <MenuItem name="3-1">新增和启动</MenuItem>
-                    <MenuItem name="3-2">活跃分析</MenuItem>
-                    <MenuItem name="3-3">时段分析</MenuItem>
-                </MenuGroup>
-                <MenuGroup title="留存">
-                    <MenuItem name="3-4">用户留存</MenuItem>
-                    <MenuItem name="3-5">流失用户</MenuItem>
-                </MenuGroup>
+                <MenuItem name="vipVideo">会员视频</MenuItem>
+                <MenuItem name="videoList">视频列表</MenuItem>
+            </Submenu>
+            <Submenu name="4">
+                <template slot="title">
+                    <Icon type="ios-people"></Icon>
+                    	用户管理
+                </template>
+                <MenuItem name="vipVideo">违规账号</MenuItem>
+                <MenuItem name="videoList">举报管理</MenuItem>
             </Submenu>
         </Menu>
 </template>
