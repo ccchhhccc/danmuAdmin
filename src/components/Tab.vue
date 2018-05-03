@@ -31,7 +31,8 @@
                     <Icon type="ios-people"></Icon>
                     	用户管理
                 </template>
-                <MenuItem name="vipVideo">违规账号</MenuItem>
+                <MenuItem name="userList">用户信息</MenuItem>
+                <MenuItem name="irregularity">违规账号</MenuItem>
                 <MenuItem name="videoList">举报管理</MenuItem>
             </Submenu>
         </Menu>

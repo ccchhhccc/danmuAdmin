@@ -10,6 +10,8 @@ import Recommend from '@/components/Recommend'
 import Rank from '@/components/Rank'
 import VipList from '@/components/VipList'
 import VideoList from '@/components/VideoList'
+import UserList from '@/components/UserList'
+import Irregularity from '@/components/Irregularity'
 
 Vue.use(Router)
 
@@ -56,6 +58,14 @@ export default new Router({
             {
                path: 'videoList',
                component: VideoList
+            },
+            {
+               path: 'userList',
+               component: UserList
+            },
+            {
+               path: 'irregularity',
+               component: Irregularity
             }
        ]
     }
