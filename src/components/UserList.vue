@@ -18,14 +18,21 @@
 		<Page :current="search.page" :total="total" simple class="page" :page-size="6"	@on-change="getUserList"></Page>
 		
 		<!--封禁提示对话框-->
-		<Modal v-model="modal1" width="360">
+		<Modal v-model="modal1" width="460">
 	        <p slot="header" style="color:#f60;text-align:center">
 	            <Icon type="information-circled"></Icon>
-	            <span>删除提示</span>
+	            <span>封禁提示</span>
 	        </p>
-	        <div style="text-align:center">
-	            <p>你确定要封禁这个账号么？</p>
-	        </div>
+	        <Form ref="blockInfo" :model="blockInfo" id="blockInfo" :label-width="80">
+		        <FormItem label="封禁时长" required>
+		            <Select v-model="blockInfo.time" style="width:350px;">
+				        <Option v-for="item in blockTime" :value="item.value" :key="item.value">{{ item.label }}</Option>
+				    </Select>
+		        </FormItem>
+		        <FormItem label="封禁原因" required>
+		            <Input v-model="blockInfo.reason" placeholder="请输入封禁原因" class="forminput"></Input>
+		        </FormItem>
+		    </Form>
 	        <div slot="footer" style="text-align:center">
 	        	<Button  @click="closeDel">取消</Button>
 	            <Button type="error" @click="toBlockUser">确定</Button>
@@ -78,6 +85,11 @@
 		},
 		data(){
 			return {
+				//封禁信息
+				blockInfo:{
+					time:'',
+					reason:''
+				},
 				//用户详情对话框
 				modal2:false,
 				//封禁id
@@ -100,6 +112,32 @@
                     {
                         value: '2',
                         label: '封禁'
+                    }
+                ],
+                blockTime: [
+                    {
+                        value: '43200000',
+                        label: '十二小时'
+                    },
+                    {
+                        value: '86400000',
+                        label: '一天'
+                    },
+                    {
+                        value: '864000000',
+                        label: '十天'
+                    },
+                    {
+                        value: '25920000000',
+                        label: '一个月'
+                    },
+                    {
+                        value: '77760000000',
+                        label: '三个月'
+                    },
+                    {
+                        value: '155520000000',
+                        label: '半年'
                     }
                 ],
                 sortList: [
@@ -209,6 +247,14 @@
                         title: '操作',
                         key: 'operate',
                         render: (h, params) => {
+                        	var flag = true
+                        	for(var i in this.irregularityList){
+                        		if(this.irregularityList[i].u_id == params.row.id){
+                        			if(this.irregularityList[i].starttime + this.irregularityList[i].time >new Date().getTime()){
+	                        			flag = false
+	                        		}
+                        		}
+                        	}
                             return h('div', [
                                 h('Button', {
                                     props: {
@@ -229,7 +275,7 @@
                                     props: {
                                         type: 'error',
                                         size: 'small',
-                                        disabled:params.row.status=='2'?true:false
+                                        disabled:flag?false:true
                                     },
                                     on: {
                                         click: () => {
@@ -255,7 +301,9 @@
 					sex:'',
 					signname:'',
 					status:''
-				}
+				},
+				//违规用户列表
+				irregularityList:[]
 			}
 			
 		},
@@ -286,6 +334,12 @@
 			//封禁账号
 			toBlockUser(){
 				var that = this
+				this.blockInfo.reason = this.blockInfo.reason.trim()
+				if(this.blockInfo.time=='' ||this.blockInfo.reason==''){
+					that.$Message.error('请输入必填信息')
+					return
+				}
+				//更改用户表的状态
 				$.ajax({
 					type:"post",
 					url:"http://localhost:2255/user/status",
@@ -298,19 +352,21 @@
 						
 					}
 				});
+				//插入封禁表数据
 				$.ajax({
 					type:"post",
 					url:"http://localhost:2255/irregularity/add",
 					data:{
 						u_id:that.delId,
-						time:2000,
-						reason:'weisuoyuwei'
+						time:that.blockInfo.time,
+						reason:that.blockInfo.reason
 					},
 					async:false,
 					success:function(data){
 						that.$Message.success('封禁账号成功')
 						that.closeDel()
 						that.getUserList()
+						that.getIrregularity()
 					}
 				});
 			},
@@ -321,6 +377,10 @@
 			//关闭确认对话框
 			closeDel(){
 				this.modal1 = false
+				this.blockInfo = {
+					time:'',
+					reason:''
+				}
 			},
 			//获取用户分页列表
 			getUserList(val){
@@ -345,6 +405,18 @@
 					}
 				});
 			},
+			//获取所有违规账号
+			getIrregularity(){
+				var that = this
+				$.ajax({
+					type:"post",
+					url:"http://localhost:2255/user/irregularity/all",
+					async:false,
+					success:function(data){
+						that.irregularityList = data.data
+					}
+				});
+			},
 			DateToString (format) {
 				let d = new Date(Number(format))
 				let date = (d.getFullYear()) + "-" + 
@@ -362,6 +434,7 @@
 			}
 		},
 		mounted(){
+			this.getIrregularity()
 			this.getUserList()
 		}
 	}

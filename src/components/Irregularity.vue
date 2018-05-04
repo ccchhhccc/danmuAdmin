@@ -257,10 +257,10 @@
 				var that = this
 				$.ajax({
 					type:"post",
-					url:"http://localhost:2255/user/status",
+					url:"http://localhost:2255/irregularity/update/time",
 					data:{
 						id:that.delId,
-						status:1,
+						time:0,
 					},
 					async:false,
 					success:function(data){

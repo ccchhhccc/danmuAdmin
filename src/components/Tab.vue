@@ -33,7 +33,15 @@
                 </template>
                 <MenuItem name="userList">用户信息</MenuItem>
                 <MenuItem name="irregularity">违规账号</MenuItem>
-                <MenuItem name="videoList">举报管理</MenuItem>
+                <MenuItem name="inform">举报管理</MenuItem>
+            </Submenu>
+            <Submenu name="5">
+                <template slot="title">
+                    <Icon type="social-snapchat"></Icon>
+                    	权限管理
+                </template>
+                <MenuItem name="adminList">管理员管理</MenuItem>
+                <MenuItem name="irregularity">权限分配</MenuItem>
             </Submenu>
         </Menu>
 </template>

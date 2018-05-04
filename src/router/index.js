@@ -12,6 +12,8 @@ import VipList from '@/components/VipList'
 import VideoList from '@/components/VideoList'
 import UserList from '@/components/UserList'
 import Irregularity from '@/components/Irregularity'
+import Inform from '@/components/Inform'
+import AdminList from '@/components/AdminList'
 
 Vue.use(Router)
 
@@ -66,6 +68,14 @@ export default new Router({
             {
                path: 'irregularity',
                component: Irregularity
+            },
+            {
+               path: 'inform',
+               component: Inform
+            },
+            {
+               path: 'adminList',
+               component: AdminList
             }
        ]
     }
