@@ -47,6 +47,7 @@
 </template>
 
 <script>
+	import $ from 'jquery'
 	export default {
 		data(){
 			return {
@@ -56,8 +57,30 @@
 		methods:{
 		  	test(name){
 		  		location.href = 'http://localhost:8888/#/admin/'+name
+		  	},
+		  	//验证是否登录
+		  	isLogin(){
+		  		$.ajax({
+		  			type:"post",
+		  			url:"http://localhost:2255/admin/isLogin",
+		  			async:false,
+		  			data:{
+		  				id:sessionStorage.getItem('id')
+		  			},
+		  			success:function(data){
+		  				console.log(data)
+		  				if(data=='success'){
+		  					location.href = 'http://localhost:8888/#/admin/carousel'
+		  				}else{
+		  					location.href = 'http://localhost:8888'
+		  				}
+		  			}
+		  		});
 		  	}
-		  }
+		},
+		mounted(){
+			this.isLogin()
+		}
 	}
 </script>
 

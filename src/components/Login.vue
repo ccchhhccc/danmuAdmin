@@ -48,10 +48,12 @@ export default {
             	url:'http://localhost:2255/admin/login',
             	type:'post',
             	data:that.user,
+            	async:false,
             	success:function(data){
             		if(data.msg == 'success'){
             			//将用户名存进临时会话中
             			sessionStorage.setItem('name',data.name)
+            			sessionStorage.setItem('id',data.id)
             			that.$Message.success('欢迎'+data.name+'登录');
             			location.href = location.href + 'admin'
             		}else{

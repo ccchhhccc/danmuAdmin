@@ -5,7 +5,7 @@
 			<Button type="primary" class="add" @click="showAdd">新增</Button>
 		</div>
 		<!--频道表格-->
-		<Table :columns="columns1" :data="channels"></Table>
+		<Table :columns="columns1" :data="channels" height="538"></Table>
 		
 		<!--新增对话框-->
 	    <Modal
