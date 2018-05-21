@@ -14,6 +14,7 @@ import UserList from '@/components/UserList'
 import Irregularity from '@/components/Irregularity'
 import Inform from '@/components/Inform'
 import AdminList from '@/components/AdminList'
+import UpdataPassword from '@/components/UpdataPassword'
 
 Vue.use(Router)
 
@@ -76,6 +77,10 @@ export default new Router({
             {
                path: 'adminList',
                component: AdminList
+            },
+            {
+               path: 'updataPassword',
+               component: UpdataPassword
             }
        ]
     }

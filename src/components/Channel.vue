@@ -180,20 +180,7 @@
 	                                        }
 	                                    }
 	                                }, status),
-	                                h('Button', {
-	                                    props: {
-	                                        type: 'error',
-	                                        size: 'small'
-	                                    },
-	                                    style: {
-	                                        marginRight: '5px'
-	                                    },
-	                                    on: {
-	                                        click: () => {
-	                                        	
-	                                        }
-	                                    }
-	                                }, '删除'),
+	                                
 	                                h('Button', {
 	                                    props: {
 	                                        type: 'primary',

@@ -8,7 +8,7 @@
 	            <Input v-model="user.name" placeholder="请输入账号"></Input>
 	        </FormItem>
 	        <FormItem label="密码" prop="password">
-	            <Input v-model="user.password" placeholder="请输入密码"></Input>
+	            <Input v-model="user.password" type="password" placeholder="请输入密码"></Input>
 	        </FormItem>
 	    </Form>
 	    <div>
