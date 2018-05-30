@@ -74,6 +74,7 @@
 <script>
 	import $ from 'jquery'
 	import { DateToString } from '../assets/js/common'
+	import { validateUrl } from '../assets/js/validateUrl'
 	export default {
 		components:{
 			
@@ -341,6 +342,7 @@
 		},
 		mounted(){
 			this.getVipList()
+			validateUrl.call(this)
 		}
 	}
 </script>

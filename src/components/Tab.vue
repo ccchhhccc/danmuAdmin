@@ -58,7 +58,7 @@
 		data(){
 			return {
 				//权限
-				limits:[]
+				limits:[],
 			}
 		},
 		methods:{
@@ -73,6 +73,7 @@
 		  			},
 		  			success:function(data){
 		  				that.limits = data
+		  				that.$store.state.limits = data
 		  			}
 		  		});
 			},
@@ -103,6 +104,7 @@
 		mounted(){
 			this.isLogin()
 			this.getLimits()
+			console.log(this.$store.state)
 		}
 	}
 </script>

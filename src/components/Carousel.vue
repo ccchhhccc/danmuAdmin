@@ -91,6 +91,7 @@
 
 <script>
 	import $ from 'jquery'
+	import { validateUrl } from '../assets/js/validateUrl'
 	export default {
 		components:{
 			
@@ -434,6 +435,7 @@
 		},
 		mounted(){
 			this.getCarousels()
+			validateUrl.call(this)
 		}
 	}
 </script>
