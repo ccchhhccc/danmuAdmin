@@ -170,11 +170,8 @@
                     },
                     
                     {
-                        title: '注册时间',
-                        key: 'time',
-                        render:(h,params) => {
-                        	return h('p',DateToString(params.row.registertime))
-                        }	
+                        title: '封禁原因',
+                        key: 'reason'
 	                },
 	                {
                         title: '操作',

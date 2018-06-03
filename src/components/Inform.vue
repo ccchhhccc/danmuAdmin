@@ -57,6 +57,8 @@
 		},
 		data(){
 			return {
+				//封禁时删除言论用
+				delObj:{},
 				//封禁信息
 				blockInfo:{
 					time:'',
@@ -147,6 +149,7 @@
                                         	this.modal2 = true
                                         	this.operateId = params.row.u_id
                                         	this.delId = params.row.id
+                                        	this.delObj = params.row
                                         }
                                     }
                                 }, '封禁'),
@@ -221,7 +224,7 @@
 					type:"post",
 					url:"http://localhost:2255/user/status",
 					data:{
-						id:that.delId,
+						id:that.delObj.u_id,
 						status:2,
 					},
 					async:false,
@@ -247,6 +250,16 @@
 						that.getInormList()
 					}
 				});
+				//删除封禁账号的相关言论
+				$.ajax({
+					type:"post",
+					url:"http://localhost:2255/inform/delmessage",
+					data:that.delObj,
+					async:false,
+					success:function(data){
+						
+					}
+				});
 			},
 			//删除举报信息
 			toDelInform(){
@@ -260,7 +273,6 @@
 					},
 					success:function(data){
 						that.closeDel()
-						that.$Message.success('删除举报信息成功')
 						that.getInormList()
 					}
 				});

@@ -15,6 +15,8 @@ import Irregularity from '@/components/Irregularity'
 import Inform from '@/components/Inform'
 import AdminList from '@/components/AdminList'
 import UpdataPassword from '@/components/UpdataPassword'
+import VideoSold from '@/components/VideoSold'
+import SoldList from '@/components/SoldList'
 
 Vue.use(Router)
 
@@ -81,6 +83,14 @@ export default new Router({
             {
                path: 'updataPassword',
                component: UpdataPassword
+            },
+            {
+               path: 'videoSold',
+               component: VideoSold
+            },
+            {
+               path: 'soldList',
+               component: SoldList
             }
        ]
     }

@@ -1,6 +1,6 @@
 var router = {
 				setting:['carousel','channel','leval'],
-				video:['video','recommend','rank'],
+				video:['video','recommend','rank','videoSold','soldList'],
 				vip:['vipVideo','videoList'],
 				user:['userList', 'irregularity', 'inform'],
 				management:['adminList']

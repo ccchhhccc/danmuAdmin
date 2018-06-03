@@ -17,6 +17,8 @@
                 <MenuItem name="video">视频审核</MenuItem>
                 <MenuItem name="recommend">推荐管理</MenuItem>
                 <MenuItem name="rank">排行榜单</MenuItem>
+                <MenuItem name="videoSold">视频下架</MenuItem>
+                <MenuItem name="soldList">下架列表	</MenuItem>
             </Submenu>
             <Submenu name="3" v-if="limits.vip==1?true:false">
                 <template slot="title">

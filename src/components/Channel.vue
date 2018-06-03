@@ -73,6 +73,21 @@
 	        </div>
 	    </Modal>
 		
+		
+		<!--删除提示对话框-->
+		<Modal v-model="modal3" width="360">
+	        <p slot="header" style="color:#f60;text-align:center">
+	            <Icon type="information-circled"></Icon>
+	            <span>删除提示</span>
+	        </p>
+	        <div style="text-align:center">
+	            <p>你确定要删除这个频道么？</p>
+	        </div>
+	        <div slot="footer" style="text-align:center">
+	        	<Button  @click="closeDel">取消</Button>
+	            <Button type="error" @click="toDel">删除</Button>
+	        </div>
+	    </Modal>
 	</div>
 </template>
 
@@ -86,6 +101,8 @@
 		},
 		data(){
 			return {
+				delchannelId:'',
+				modal3:false,
 				//更新对话框
 				modal2:false,
 				//更新对象
@@ -112,28 +129,36 @@
 				columns1: [
 						{
 	                        title: '排序',
-	                        key: 'sort'
+	                        key: 'sort',
+	                        width:70
 	                    },
 	                    {
 	                        title: '标题',
-	                        key: 'name'
+	                        key: 'name',
+	                        width:150
 	                    },
 	                    {
 	                        title: '图片',
 	                        key: 'title',
+	                        width:100,
 	                        render:(h,params) => {
 	                        	return h('img',{
 	                        		attrs:{
 	                        			src:params.row.imgurl
 	                        		},
 	                        		style:{
-	                        			margin:'10px',
+	                        			margin:'10px 0 ',
 	                        			width:'50px',
 	                        			height:'50px',
 	                        			display:'block'
 	                        		}
 	                        	})
 	                        }
+	                    },
+	                    {
+	                        title: '视频数量',
+	                        key: 'count_num',
+	                        width:100
 	                    },
 	                    {
 	                        title: '简介',
@@ -163,6 +188,7 @@
 	                        render: (h, params) => {
 	                        	var status = params.row.status == 1 ? '停用':'启用'
 	                        	var color = params.row.status == 1 ? 'error':'primary'
+	                        	var canDel = params.row.count_num == 0 ? true :false 
 	                            return h('div', [
 	                                h('Button', {
 	                                    props: {
@@ -187,13 +213,30 @@
 	                                        type: 'primary',
 	                                        size: 'small'
 	                                    },
+	                                    style: {
+	                                        marginRight: '5px'
+	                                    },
 	                                    on: {
 	                                        click: () => {
 	                                        	this.getChannelById(params.row.c_id)
 	                                        	this.showUpdate()
 	                                        }
 	                                    }
-	                                }, '修改')
+	                                }, '修改'),
+	                                
+	                                h('Button', {
+	                                    props: {
+	                                        type: 'error',
+	                                        size: 'small',
+	                                        disabled:!canDel
+	                                    },
+	                                    on: {
+	                                        click: () => {
+	                                            this.delchannelId = params.row.c_id
+	                                            this.modal3 = true
+	                                        }
+	                                    }
+	                                }, '删除')
 	                            ]);
 	                        }
 	                    }
@@ -202,6 +245,26 @@
 			
 		},
 		methods:{
+			//进行删除操作
+			toDel(){
+				var that = this
+				$.ajax({
+					type:"post",
+					url:"http://localhost:2255/channel/del",
+					data:{
+						id:that.delchannelId
+					},
+					success:function(data){
+						that.closeDel()
+						that.$Message.success('删除频道成功')
+						that.getChannelList()
+					}
+				});
+			},
+			//关闭删除框
+			closeDel(){
+				this.modal3 = false
+			},
 			//更新频道
 			toUpdateChannel(){
 				//去前后空格
@@ -254,6 +317,7 @@
 					data:that.updateChannel,
 					success:function(data){
 						that.closeUpdate()
+						that.$Message.success('频道修改成功')
 						that.getChannelList()
 					}
 				});
