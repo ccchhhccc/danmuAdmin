@@ -21,7 +21,7 @@
 			    <FormItem label="上传图片" required>
 			    <form  id="uploadForm" >
 		        	<div class="upbox">
-		        		<input type="file" id="file" name="channel" @change="showUrl"/>
+		        		<input type="file" accept="image/*" id="file" name="channel" @change="showUrl"/>
 		        		<img :src="uploadimg" v-if="uploadimg.length > 0"/>
 		        	</div>
 		        	<a class="delIcon" v-if="uploadimg.length > 0" @click="delUrl">删除</a>
@@ -54,7 +54,7 @@
 			    <FormItem label="上传图片" required>
 			    <form  id="uploadFormupdate" >
 		        	<div class="upbox">
-		        		<input type="file" id="file" name="channel" @change="showUrl"/>
+		        		<input type="file" accept="image/*" id="file" name="channel" @change="showUrl"/>
 		        		<img :src="uploadimg" v-if="uploadimg.length > 0"/>
 		        	</div>
 		        	<a class="delIcon" v-if="uploadimg.length > 0" @click="delUrl">删除</a>

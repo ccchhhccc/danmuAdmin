@@ -35,7 +35,7 @@
 			    <FormItem label="上传图片" required>
 			    <form  id="uploadForm" >
 		        	<div class="upbox">
-		        		<input type="file" id="file" name="banner" @change="showUrl"/>
+		        		<input type="file" accept="image/*" id="file" name="banner" @change="showUrl"/>
 		        		<img :src="uploadimg" v-if="uploadimg.length > 0"/>
 		        	</div>
 		        	<a class="delIcon" v-if="uploadimg.length > 0" @click="delBannerUrl">删除</a>
@@ -68,7 +68,7 @@
 			    <FormItem label="上传图片" required>
 			    <form  id="uploadFormupdate" >
 		        	<div class="upbox">
-		        		<input type="file" id="file" name="banner" @change="showUrl"/>
+		        		<input type="file" accept="image/*" id="file" name="banner" @change="showUrl"/>
 		        		<img :src="uploadimg" v-if="uploadimg.length > 0"/>
 		        	</div>
 		        	<a class="delIcon" v-if="uploadimg.length > 0" @click="delBannerUrl">删除</a>
@@ -370,7 +370,7 @@
 			closeAdd(){
 				this.uploadimg = ''
 				$('#file').val('')
-				this.addBanne = {
+				this.addBanner = {
 					title:'',
 					link:'',
 					url:'',
